@@ -17,10 +17,11 @@ struct GraveSwitchApp: App {
         }
         
         // The Settings window is standard SwiftUI
-        Settings {
+        Window("GraveSwitch", id: "settings") {
             SettingsView()
                 .environmentObject(settings)
         }
+        .windowResizability(.contentSize)
     }
 }
 
@@ -65,15 +66,9 @@ struct ContentView: View {
             
             Divider()
             
-            if #available(macOS 13.0, *) {
-                SettingsLink {
-                    Text("settings_menu")
-                }
-            } else {
-                Button("settings_menu") {
-                    NSApp.sendAction(Selector("showSettingsWindow:"), to: nil, from: nil)
-                    NSApp.activate(ignoringOtherApps: true)
-                }
+            Button("settings_menu") {
+                openWindow(id: "settings")
+                NSApp.activate(ignoringOtherApps: true)
             }
             
             Divider()
