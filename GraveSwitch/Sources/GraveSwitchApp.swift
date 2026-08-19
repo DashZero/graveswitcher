@@ -28,7 +28,7 @@ struct GraveSwitchApp: App {
 class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Request permissions on startup if not already granted
-        _ = KeyboardEventTapManager.shared.checkPermission()
+        KeyboardEventTapManager.shared.requestPermission()
         
         if SettingsManager.shared.isEnabled {
             do {
