@@ -1,39 +1,38 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @State private var selection: String? = "General"
+    
     var body: some View {
-        TabView {
-            GeneralSettingsView()
-                .tabItem {
-                    Label("general_settings", systemImage: "gearshape")
-                }
-            
-            LanguageSettingsView()
-                .tabItem {
-                    Label("languages_settings", systemImage: "globe")
-                }
-            
-            KeyboardSettingsView()
-                .tabItem {
-                    Label("keyboard_settings", systemImage: "keyboard")
-                }
-                
-            PermissionsSettingsView()
-                .tabItem {
-                    Label("permissions_settings", systemImage: "lock.shield")
-                }
-            
-            AboutView()
-                .tabItem {
-                    Label("about_settings", systemImage: "info.circle")
-                }
-            
-            HelpView()
-                .tabItem {
-                    Label("help_settings", systemImage: "questionmark.circle")
-                }
+        NavigationSplitView {
+            List(selection: $selection) {
+                Label("general_settings", systemImage: "gearshape").tag("General")
+                Label("languages_settings", systemImage: "globe").tag("Languages")
+                Label("keyboard_settings", systemImage: "keyboard").tag("Keyboard")
+                Label("permissions_settings", systemImage: "lock.shield").tag("Permissions")
+                Label("about_settings", systemImage: "info.circle").tag("About")
+                Label("help_settings", systemImage: "questionmark.circle").tag("Help")
+            }
+            .navigationSplitViewColumnWidth(min: 150, ideal: 180, max: 200)
+        } detail: {
+            switch selection {
+            case "General":
+                GeneralSettingsView()
+            case "Languages":
+                LanguageSettingsView()
+            case "Keyboard":
+                KeyboardSettingsView()
+            case "Permissions":
+                PermissionsSettingsView()
+            case "About":
+                AboutView()
+            case "Help":
+                HelpView()
+            default:
+                GeneralSettingsView()
+            }
         }
-        .frame(width: 550, height: 450)
+        .frame(width: 650, height: 450)
         .onAppear {
             NSApp.activate(ignoringOtherApps: true)
         }
