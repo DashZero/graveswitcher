@@ -65,9 +65,15 @@ struct ContentView: View {
             
             Divider()
             
-            Button("settings") {
-                NSApp.sendAction(Selector("showSettingsWindow:"), to: nil, from: nil)
-                NSApp.activate(ignoringOtherApps: true)
+            if #available(macOS 13.0, *) {
+                SettingsLink {
+                    Text("settings_menu")
+                }
+            } else {
+                Button("settings_menu") {
+                    NSApp.sendAction(Selector("showSettingsWindow:"), to: nil, from: nil)
+                    NSApp.activate(ignoringOtherApps: true)
+                }
             }
             
             Divider()

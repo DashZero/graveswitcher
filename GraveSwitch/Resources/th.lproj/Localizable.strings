@@ -37,6 +37,7 @@
 "status_paused" = "สถานะ: หยุดพัก";
 "quit" = "ออก GraveSwitch";
 
+"settings_menu" = "การตั้งค่า...";
 "help_settings" = "วิธีใช้";
 "help_title" = "วิธีใช้งาน GraveSwitch";
 "help_desc" = "GraveSwitch เป็นเครื่องมือเล็กๆ ที่ทำให้ปุ่ม ` (Grave) ของคุณสลับไปมาระหว่างสองภาษาที่คุณเลือกได้ เหมือนกับใน Windows";

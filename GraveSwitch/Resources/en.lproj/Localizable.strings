@@ -37,6 +37,7 @@
 "status_paused" = "Status: Paused";
 "quit" = "Quit GraveSwitch";
 
+"settings_menu" = "Settings...";
 "help_settings" = "Help";
 "help_title" = "How to use GraveSwitch";
 "help_desc" = "GraveSwitch is a simple utility that makes your ` (Grave) key toggle between your two preferred languages, just like on Windows.";

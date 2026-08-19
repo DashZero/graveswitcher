@@ -34,6 +34,9 @@ struct SettingsView: View {
                 }
         }
         .frame(width: 550, height: 450)
+        .onAppear {
+            NSApp.activate(ignoringOtherApps: true)
+        }
     }
 }
 
