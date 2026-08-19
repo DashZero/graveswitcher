@@ -11,6 +11,7 @@
 "launch_at_login" = "เปิดแอพเมื่อล็อกอิน";
 "launch_at_login_desc" = "เปิดใช้งาน GraveSwitch โดยอัตโนมัติเมื่อเข้าสู่ระบบ Mac";
 "menu_bar_indicator" = "แสดงภาษาปัจจุบัน (EN/TH) ในเมนูบาร์";
+"menu_bar_indicator_desc" = "แสดงข้อความ ('EN' หรือ 'TH') ข้างไอคอนในเมนูบาร์";
 "icon_settings" = "ไอคอนและการแสดงผล";
 "show_in_menu_bar" = "แสดงใน Menu Bar";
 "show_in_menu_bar_desc" = "แสดงไอคอน GraveSwitch ในแถบเมนูด้านบน";

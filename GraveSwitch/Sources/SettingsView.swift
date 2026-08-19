@@ -203,6 +203,37 @@ struct ModernCard<Content: View>: View {
     }
 }
 
+// MARK: - Reusable Setting Toggle Row
+struct SettingToggleRow: View {
+    let titleKey: String
+    let descKey: String
+    @Binding var isOn: Bool
+    
+    var body: some View {
+        HStack(alignment: .top, spacing: 10) {
+            Toggle("", isOn: $isOn)
+                .toggleStyle(.checkbox)
+                .labelsHidden()
+                .padding(.top, 1)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Text(LocalizedStringKey(titleKey))
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.primary)
+                Text(LocalizedStringKey(descKey))
+                    .font(.system(size: 11))
+                    .foregroundColor(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            Spacer()
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            isOn.toggle()
+        }
+    }
+}
+
 // MARK: - General Settings View
 struct GeneralSettingsView: View {
     @EnvironmentObject var settings: SettingsManager
@@ -213,7 +244,7 @@ struct GeneralSettingsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
-                // Live Status Hero Banner
+                // Live Status Hero Banner (Master Enable/Disable)
                 ModernCard {
                     HStack(spacing: 14) {
                         ZStack {
@@ -252,7 +283,7 @@ struct GeneralSettingsView: View {
                         
                         Spacer()
                         
-                        // Main Toggle
+                        // Single Master Enable/Disable Toggle
                         Toggle("", isOn: $settings.isEnabled)
                             .toggleStyle(.switch)
                             .labelsHidden()
@@ -305,7 +336,7 @@ struct GeneralSettingsView: View {
                         } else {
                             HStack {
                                 Text(LocalizedStringKey("language_a"))
-                                    .font(.system(size: 13, weight: .medium))
+                                    .font(.system(size: 13, weight: .semibold))
                                 Spacer()
                                 Picker("", selection: $settings.languageA) {
                                     ForEach(sources, id: \.id) { source in
@@ -313,14 +344,13 @@ struct GeneralSettingsView: View {
                                     }
                                 }
                                 .labelsHidden()
-                                .frame(width: 220)
                             }
                             
                             Divider()
                             
                             HStack {
                                 Text(LocalizedStringKey("language_b"))
-                                    .font(.system(size: 13, weight: .medium))
+                                    .font(.system(size: 13, weight: .semibold))
                                 Spacer()
                                 Picker("", selection: $settings.languageB) {
                                     ForEach(sources, id: \.id) { source in
@@ -328,7 +358,6 @@ struct GeneralSettingsView: View {
                                     }
                                 }
                                 .labelsHidden()
-                                .frame(width: 220)
                             }
                         }
                         
@@ -347,72 +376,40 @@ struct GeneralSettingsView: View {
                     }
                 }
                 
-                // App Behavior Card
-                ModernCard(title: "general_settings", icon: "gearshape", iconColor: .gray) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Toggle(isOn: $settings.isEnabled) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(LocalizedStringKey("enable_graveswitch"))
-                                    .font(.system(size: 13, weight: .medium))
-                                Text(LocalizedStringKey("enable_graveswitch_desc"))
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .toggleStyle(.checkbox)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        Divider()
-                        
-                        Toggle(isOn: $settings.launchAtLogin) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(LocalizedStringKey("launch_at_login"))
-                                    .font(.system(size: 13, weight: .medium))
-                                Text(LocalizedStringKey("launch_at_login_desc"))
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .toggleStyle(.checkbox)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    }
+                // Startup & Behavior Card (No duplicate Enable toggle!)
+                ModernCard(title: "launch_at_login", icon: "rocket.fill", iconColor: .blue) {
+                    SettingToggleRow(
+                        titleKey: "launch_at_login",
+                        descKey: "launch_at_login_desc",
+                        isOn: $settings.launchAtLogin
+                    )
                 }
                 
                 // Icon & Appearance Card
                 ModernCard(title: "icon_settings", icon: "menubar.arrow.up.rectangle", iconColor: .purple) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Toggle(isOn: $settings.showInMenuBar) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(LocalizedStringKey("show_in_menu_bar"))
-                                    .font(.system(size: 13, weight: .medium))
-                                Text(LocalizedStringKey("show_in_menu_bar_desc"))
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .toggleStyle(.checkbox)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    VStack(alignment: .leading, spacing: 12) {
+                        SettingToggleRow(
+                            titleKey: "show_in_menu_bar",
+                            descKey: "show_in_menu_bar_desc",
+                            isOn: $settings.showInMenuBar
+                        )
                         
                         Divider()
                         
-                        Toggle(isOn: $settings.showInDock) {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(LocalizedStringKey("show_in_dock"))
-                                    .font(.system(size: 13, weight: .medium))
-                                Text(LocalizedStringKey("show_in_dock_desc"))
-                                    .font(.system(size: 11))
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                        .toggleStyle(.checkbox)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        SettingToggleRow(
+                            titleKey: "show_in_dock",
+                            descKey: "show_in_dock_desc",
+                            isOn: $settings.showInDock
+                        )
                         
                         if settings.showInMenuBar {
                             Divider()
-                            Toggle("menu_bar_indicator", isOn: $settings.showMenuBarText)
-                                .font(.system(size: 13, weight: .medium))
-                                .toggleStyle(.checkbox)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            SettingToggleRow(
+                                titleKey: "menu_bar_indicator",
+                                descKey: "menu_bar_indicator_desc",
+                                isOn: $settings.showMenuBarText
+                            )
                         }
                     }
                 }

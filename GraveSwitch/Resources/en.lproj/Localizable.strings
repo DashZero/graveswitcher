@@ -11,6 +11,7 @@
 "launch_at_login" = "Launch at Login";
 "launch_at_login_desc" = "Automatically start GraveSwitch when you log into your Mac.";
 "menu_bar_indicator" = "Show current language (EN/TH) in menu bar";
+"menu_bar_indicator_desc" = "Display text label ('EN' or 'TH') next to the icon in the menu bar.";
 "icon_settings" = "Icon & Appearance";
 "show_in_menu_bar" = "Show in Menu Bar";
 "show_in_menu_bar_desc" = "Display GraveSwitch icon in the top menu bar.";
