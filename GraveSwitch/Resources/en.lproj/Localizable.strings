@@ -9,8 +9,12 @@
 "enable_graveswitch" = "Enable GraveSwitch";
 "enable_graveswitch_desc" = "Turn this off temporarily if you want the ` key to behave normally.";
 "launch_at_login" = "Launch at Login";
-"launch_at_login_desc" = "Start GraveSwitch automatically when you sign in to your Mac.";
-"menu_bar_indicator" = "Show current language in menu bar";
+"menu_bar_indicator" = "Show current language (EN/TH) in menu bar";
+"icon_settings" = "Icon & Appearance";
+"show_in_menu_bar" = "Show in Menu Bar";
+"show_in_menu_bar_desc" = "Display GraveSwitch icon in the top menu bar.";
+"show_in_dock" = "Show in Dock";
+"show_in_dock_desc" = "Display GraveSwitch icon in the Dock (Launching GraveSwitch from Spotlight or Finder opens Settings).";
 
 "choose_languages" = "Choose the two keyboard languages GraveSwitch should switch between.";
 "language_a" = "Language A";

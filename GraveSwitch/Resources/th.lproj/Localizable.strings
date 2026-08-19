@@ -9,8 +9,12 @@
 "enable_graveswitch" = "เปิดใช้งาน GraveSwitch";
 "enable_graveswitch_desc" = "ปิดชั่วคราวหากคุณต้องการให้ปุ่ม ` ทำงานตามปกติ";
 "launch_at_login" = "เปิดแอพเมื่อล็อกอิน";
-"launch_at_login_desc" = "เริ่ม GraveSwitch โดยอัตโนมัติเมื่อคุณเข้าสู่ระบบ Mac";
-"menu_bar_indicator" = "แสดงภาษาปัจจุบันในเมนูบาร์";
+"menu_bar_indicator" = "แสดงภาษาปัจจุบัน (EN/TH) ในเมนูบาร์";
+"icon_settings" = "ไอคอนและการแสดงผล";
+"show_in_menu_bar" = "แสดงใน Menu Bar";
+"show_in_menu_bar_desc" = "แสดงไอคอน GraveSwitch ในแถบเมนูด้านบน";
+"show_in_dock" = "แสดงใน Dock";
+"show_in_dock_desc" = "แสดงไอคอน GraveSwitch ใน Dock (การเปิด GraveSwitch จาก Spotlight หรือ Finder จะเปิดหน้าต่างการตั้งค่าด้วย)";
 
 "choose_languages" = "เลือกสองภาษาที่ต้องการให้ GraveSwitch สลับไปมา";
 "language_a" = "ภาษา A";

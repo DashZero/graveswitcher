@@ -7,9 +7,7 @@ struct GraveSwitchApp: App {
     @StateObject private var settings = SettingsManager.shared
 
     var body: some Scene {
-        // We use MenuBarExtra directly for macOS 13+.
-        // The spec recommends an icon in the menu bar.
-        MenuBarExtra {
+        MenuBarExtra(isInserted: $settings.showInMenuBar) {
             ContentView()
                 .environmentObject(settings)
         } label: {
@@ -26,6 +24,9 @@ struct GraveSwitchApp: App {
         Window("GraveSwitch", id: "settings") {
             SettingsView()
                 .environmentObject(settings)
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("OpenSettingsWindow"))) { _ in
+                    NSApp.activate(ignoringOtherApps: true)
+                }
         }
         .windowResizability(.contentSize)
     }
@@ -44,8 +45,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         
-        // Hide from Dock initially
-        NSApp.setActivationPolicy(.accessory)
+        SettingsManager.shared.updateActivationPolicy()
+    }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        NotificationCenter.default.post(name: Notification.Name("OpenSettingsWindow"), object: nil)
+        return true
     }
 }
 

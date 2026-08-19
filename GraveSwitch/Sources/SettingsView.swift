@@ -107,8 +107,23 @@ struct GeneralSettingsView: View {
                 Text("launch_at_login_desc")
                     .font(.caption)
                     .foregroundColor(.secondary)
+            }
+            
+            // Icon & Appearance Section
+            Section("icon_settings") {
+                Toggle("show_in_menu_bar", isOn: $settings.showInMenuBar)
+                Text("show_in_menu_bar_desc")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 
-                Toggle("menu_bar_indicator", isOn: $settings.showMenuBarText)
+                Toggle("show_in_dock", isOn: $settings.showInDock)
+                Text("show_in_dock_desc")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                if settings.showInMenuBar {
+                    Toggle("menu_bar_indicator", isOn: $settings.showMenuBarText)
+                }
             }
         }
         .formStyle(.grouped)
