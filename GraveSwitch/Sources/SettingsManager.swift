@@ -7,6 +7,7 @@ class SettingsManager: ObservableObject {
     @AppStorage("isEnabled") var isEnabled: Bool = true
     @AppStorage("languageA") var languageA: String = "com.apple.keylayout.ABC"
     @AppStorage("languageB") var languageB: String = "com.apple.keylayout.Thai"
+    @AppStorage("showMenuBarText") var showMenuBarText: Bool = true
     
     @Published var launchAtLogin: Bool = false {
         didSet {

@@ -35,6 +35,12 @@
 
 "status_active" = "Status: Active";
 "status_paused" = "Status: Paused";
+"status_active_short" = "Active";
+"status_paused_short" = "Paused";
+"current_language_label" = "CURRENT LANGUAGE";
+"permission_required_warning" = "Input Monitoring permission required";
+"permission_granted_desc" = "Keyboard monitoring is enabled and working.";
+"permission_desc_short" = "Input Monitoring permission is needed to intercept the ` key.";
 "quit" = "Quit GraveSwitch";
 
 "settings_menu" = "Settings...";

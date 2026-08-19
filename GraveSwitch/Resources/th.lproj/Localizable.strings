@@ -35,6 +35,12 @@
 
 "status_active" = "สถานะ: ทำงานอยู่";
 "status_paused" = "สถานะ: หยุดพัก";
+"status_active_short" = "เปิดใช้งาน";
+"status_paused_short" = "หยุดพัก";
+"current_language_label" = "ภาษาปัจจุบัน";
+"permission_required_warning" = "จำเป็นต้องได้รับสิทธิ์ Input Monitoring";
+"permission_granted_desc" = "อนุญาตการตรวจสอบแป้นพิมพ์เรียบร้อยแล้ว";
+"permission_desc_short" = "จำเป็นต้องได้รับสิทธิ์เพื่อตรวจจับการกดปุ่ม `";
 "quit" = "ออก GraveSwitch";
 
 "settings_menu" = "การตั้งค่า...";

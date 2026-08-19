@@ -60,6 +60,17 @@ class InputSourceManager {
         return Unmanaged<CFString>.fromOpaque(namePtr).takeUnretainedValue() as String
     }
     
+    func shortLanguageCode() -> String {
+        guard let name = currentSourceLocalizedName() else { return "⌨" }
+        let lower = name.lowercased()
+        if lower.contains("thai") || lower.contains("ไทย") {
+            return "TH"
+        } else if lower.contains("abc") || lower.contains("english") || lower.contains("u.s.") || lower.contains("us") {
+            return "EN"
+        }
+        return String(name.prefix(2)).uppercased()
+    }
+    
     private func selectSource(id: String) {
         if let source = availableSources().first(where: { $0.id == id }) {
             TISSelectInputSource(source.sourceRef)
