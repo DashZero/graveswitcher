@@ -1,0 +1,23 @@
+name: GraveSwitch
+options:
+  bundleIdPrefix: com.example
+targets:
+  GraveSwitch:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - GraveSwitch/Sources
+      - GraveSwitch/Resources
+    settings:
+      base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_IDENTITY: ""
+        CODE_SIGN_ENTITLEMENTS: GraveSwitch/GraveSwitch.entitlements
+        ENABLE_HARDENED_RUNTIME: YES
+        INFOPLIST_KEY_LSUIElement: YES
+        INFOPLIST_KEY_NSHumanReadableCopyright: "© 2026"
+        INFOPLIST_KEY_NSUserEventsUsageDescription: "GraveSwitch needs to monitor the Grave key for language switching."
+        GENERATE_INFOPLIST_FILE: YES
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 1.0.0

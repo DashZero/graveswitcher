@@ -1,0 +1,90 @@
+import SwiftUI
+import ServiceManagement
+
+@main
+struct GraveSwitchApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @StateObject private var settings = SettingsManager.shared
+
+    var body: some Scene {
+        // We use MenuBarExtra directly for macOS 13+.
+        // The spec recommends an icon in the menu bar.
+        MenuBarExtra {
+            ContentView()
+                .environmentObject(settings)
+        } label: {
+            Image("AppIcon")
+                // A template rendering mode makes it monochrome and adaptive to Dark/Light mode
+                // Since "AppIcon" usually has colors, we might need a specific template image.
+                // Assuming the user's icon works as a template or they just want the raw image.
+                // We'll let macOS handle it based on standard MenuBarExtra behaviors.
+        }
+        
+        // The Settings window is standard SwiftUI
+        Window("GraveSwitch", id: "settings") {
+            SettingsView()
+                .environmentObject(settings)
+        }
+        .windowResizability(.contentSize)
+    }
+}
+
+class AppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // Request permissions on startup if not already granted
+        _ = KeyboardEventTapManager.shared.checkPermission()
+        
+        if SettingsManager.shared.isEnabled {
+            do {
+                try KeyboardEventTapManager.shared.start()
+            } catch {
+                print("Failed to start event tap: \(error)")
+            }
+        }
+        
+        // Hide from Dock initially
+        NSApp.setActivationPolicy(.accessory)
+    }
+}
+
+struct ContentView: View {
+    @EnvironmentObject var settings: SettingsManager
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(settings.isEnabled ? "status_active" : "status_paused")
+                .font(.headline)
+            Text("current_language \(InputSourceManager.shared.currentSourceLocalizedName() ?? "?")")
+            
+            Divider()
+            
+            Toggle("enable_graveswitch", isOn: $settings.isEnabled)
+                .onChange(of: settings.isEnabled) { newValue in
+                    if newValue {
+                        try? KeyboardEventTapManager.shared.start()
+                    } else {
+                        KeyboardEventTapManager.shared.stop()
+                    }
+                }
+            
+            Divider()
+            
+            Button("settings") {
+                openWindow(id: "settings")
+                NSApp.activate(ignoringOtherApps: true)
+            }
+            
+            Divider()
+            
+            Toggle("launch_at_login", isOn: $settings.launchAtLogin)
+            
+            Divider()
+            
+            Button("quit") {
+                NSApplication.shared.terminate(nil)
+            }
+        }
+        .padding()
+    }
+}

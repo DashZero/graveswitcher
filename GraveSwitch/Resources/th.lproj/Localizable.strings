@@ -1,0 +1,38 @@
+/* Thai Localization */
+"app_name" = "GraveSwitch";
+"general_settings" = "ทั่วไป";
+"languages_settings" = "ภาษา";
+"keyboard_settings" = "แป้นพิมพ์";
+"permissions_settings" = "สิทธิ์การเข้าถึง";
+"about_settings" = "เกี่ยวกับ";
+
+"enable_graveswitch" = "เปิดใช้งาน GraveSwitch";
+"enable_graveswitch_desc" = "ปิดชั่วคราวหากคุณต้องการให้ปุ่ม ` ทำงานตามปกติ";
+"launch_at_login" = "เปิดแอพเมื่อล็อกอิน";
+"launch_at_login_desc" = "เริ่ม GraveSwitch โดยอัตโนมัติเมื่อคุณเข้าสู่ระบบ Mac";
+"menu_bar_indicator" = "แสดงภาษาปัจจุบันในเมนูบาร์";
+
+"choose_languages" = "เลือกสองภาษาที่ต้องการให้ GraveSwitch สลับไปมา";
+"language_a" = "ภาษา A";
+"language_b" = "ภาษา B";
+"test_switch" = "ทดสอบการสลับภาษา";
+"current_language" = "ภาษาปัจจุบัน: %@";
+
+"keyboard_shortcuts_title" = "ปุ่มลัด";
+"switch_language_desc" = "สลับภาษา";
+"type_backtick_desc" = "พิมพ์ `";
+"type_tilde_desc" = "พิมพ์ ~";
+"macos_shortcuts_desc" = "ปุ่มลัดระบบ (ไม่ได้รับผลกระทบ)";
+"macos_shortcuts_info" = "Command + ` จะยังคงสลับหน้าต่างตามปกติของ macOS";
+
+"permission_title" = "อนุญาตการตรวจสอบแป้นพิมพ์";
+"permission_desc" = "GraveSwitch จำเป็นต้องได้รับสิทธิ์ Input Monitoring เพื่อตรวจจับปุ่ม ` ขณะใช้งานแอพอื่น\nโปรดไปที่ System Settings -> Privacy & Security -> Input Monitoring เพื่ออนุญาต และเปิดแอพใหม่อีกครั้งหากมีข้อความแจ้งเตือน";
+"open_system_settings" = "เปิด System Settings";
+"permission_granted" = "อนุญาตแล้ว";
+
+"about_desc" = "สลับภาษาบน macOS ด้วยปุ่ม `\n\nออกแบบมาสำหรับผู้ที่สลับใช้งานระหว่าง Windows และ Mac เป็นประจำ และคุ้นเคยกับการเปลี่ยนภาษาด้วยปุ่ม Grave/Backtick แบบ Windows";
+"about_credit" = "ขอขอบคุณครอบครัวของฉันสำหรับทุกการสนับสนุน";
+
+"status_active" = "สถานะ: ทำงานอยู่";
+"status_paused" = "สถานะ: หยุดพัก";
+"quit" = "ออก GraveSwitch";

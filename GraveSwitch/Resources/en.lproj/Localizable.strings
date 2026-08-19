@@ -1,0 +1,38 @@
+/* English Localization */
+"app_name" = "GraveSwitch";
+"general_settings" = "General";
+"languages_settings" = "Languages";
+"keyboard_settings" = "Keyboard";
+"permissions_settings" = "Permissions";
+"about_settings" = "About";
+
+"enable_graveswitch" = "Enable GraveSwitch";
+"enable_graveswitch_desc" = "Turn this off temporarily if you want the ` key to behave normally.";
+"launch_at_login" = "Launch at Login";
+"launch_at_login_desc" = "Start GraveSwitch automatically when you sign in to your Mac.";
+"menu_bar_indicator" = "Show current language in menu bar";
+
+"choose_languages" = "Choose the two keyboard languages GraveSwitch should switch between.";
+"language_a" = "Language A";
+"language_b" = "Language B";
+"test_switch" = "Test Switch";
+"current_language" = "Current Language: %@";
+
+"keyboard_shortcuts_title" = "Keyboard Shortcuts";
+"switch_language_desc" = "Switch language";
+"type_backtick_desc" = "Type `";
+"type_tilde_desc" = "Type ~";
+"macos_shortcuts_desc" = "Protected macOS shortcuts";
+"macos_shortcuts_info" = "Command + ` continues to work normally in macOS.";
+
+"permission_title" = "Allow Keyboard Monitoring";
+"permission_desc" = "GraveSwitch needs Input Monitoring to detect the ` key while other apps are active.\nGrant the permission in System Settings -> Privacy & Security -> Input Monitoring, and restart the app if prompted.";
+"open_system_settings" = "Open System Settings";
+"permission_granted" = "Permission Granted";
+
+"about_desc" = "Switch keyboard languages on macOS using the ` key.\n\nDesigned for users who frequently switch between Windows and Mac setups and prefer the Windows-style Grave-key language switching workflow.";
+"about_credit" = "Special thanks to my family for their support.";
+
+"status_active" = "Status: Active";
+"status_paused" = "Status: Paused";
+"quit" = "Quit GraveSwitch";
