@@ -27,6 +27,11 @@ struct SettingsView: View {
                 .tabItem {
                     Label("about_settings", systemImage: "info.circle")
                 }
+            
+            HelpView()
+                .tabItem {
+                    Label("help_settings", systemImage: "questionmark.circle")
+                }
         }
         .padding()
         .frame(width: 500, height: 400)
@@ -181,5 +186,37 @@ struct AboutView: View {
                 .padding(.top)
         }
         .padding()
+    }
+}
+
+struct HelpView: View {
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 15) {
+                Text("help_title")
+                    .font(.title)
+                    .bold()
+                
+                Text("help_desc")
+                
+                Text("help_how_to_use")
+                    .font(.headline)
+                    .padding(.top, 10)
+                Text("help_how_to_use_desc")
+                
+                Text("help_literal_grave")
+                    .font(.headline)
+                    .padding(.top, 10)
+                Text("help_literal_grave_desc")
+                
+                Text("help_pause")
+                    .font(.headline)
+                    .padding(.top, 10)
+                Text("help_pause_desc")
+                
+                Spacer()
+            }
+            .padding()
+        }
     }
 }

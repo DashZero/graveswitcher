@@ -36,3 +36,13 @@
 "status_active" = "สถานะ: ทำงานอยู่";
 "status_paused" = "สถานะ: หยุดพัก";
 "quit" = "ออก GraveSwitch";
+
+"help_settings" = "วิธีใช้";
+"help_title" = "วิธีใช้งาน GraveSwitch";
+"help_desc" = "GraveSwitch เป็นเครื่องมือเล็กๆ ที่ทำให้ปุ่ม ` (Grave) ของคุณสลับไปมาระหว่างสองภาษาที่คุณเลือกได้ เหมือนกับใน Windows";
+"help_how_to_use" = "การสลับภาษา";
+"help_how_to_use_desc" = "เพียงแค่กดปุ่ม ` หรือ Shift + ` เพื่อสลับระหว่างภาษา A และภาษา B";
+"help_literal_grave" = "การพิมพ์เครื่องหมาย Grave (`) หรือ Tilde (~)";
+"help_literal_grave_desc" = "หากคุณจำเป็นต้องพิมพ์เครื่องหมาย ` (เช่น เวลาเขียนโค้ด) ให้กด Option + `\nและหากต้องการพิมพ์เครื่องหมาย ~ ให้กด Option + Shift + `";
+"help_pause" = "การหยุดพัก GraveSwitch";
+"help_pause_desc" = "หากคุณต้องใช้ปุ่ม ` แบบปกติเป็นเวลานาน ให้คลิกไอคอนบน Menu Bar แล้วปิด 'เปิดใช้งาน GraveSwitch' ในแท็บทั่วไป คุณสามารถเปิดกลับมาได้ตลอดเวลา";

@@ -36,3 +36,13 @@
 "status_active" = "Status: Active";
 "status_paused" = "Status: Paused";
 "quit" = "Quit GraveSwitch";
+
+"help_settings" = "Help";
+"help_title" = "How to use GraveSwitch";
+"help_desc" = "GraveSwitch is a simple utility that makes your ` (Grave) key toggle between your two preferred languages, just like on Windows.";
+"help_how_to_use" = "Switching Languages";
+"help_how_to_use_desc" = "Simply press the ` key or Shift + ` to toggle between Language A and Language B.";
+"help_literal_grave" = "Typing a Literal Backtick";
+"help_literal_grave_desc" = "If you need to type the ` character (for example, while coding or writing Markdown), press Option + `.\nTo type a tilde (~), press Option + Shift + `.";
+"help_pause" = "Pausing GraveSwitch";
+"help_pause_desc" = "If you need the ` key to behave normally for an extended period, open this app from the Menu Bar and toggle off 'Enable GraveSwitch' in the General settings. You can toggle it back on whenever you're ready.";
