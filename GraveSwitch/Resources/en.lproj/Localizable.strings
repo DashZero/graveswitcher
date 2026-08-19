@@ -9,6 +9,7 @@
 "enable_graveswitch" = "Enable GraveSwitch";
 "enable_graveswitch_desc" = "Turn this off temporarily if you want the ` key to behave normally.";
 "launch_at_login" = "Launch at Login";
+"launch_at_login_desc" = "Automatically start GraveSwitch when you log into your Mac.";
 "menu_bar_indicator" = "Show current language (EN/TH) in menu bar";
 "icon_settings" = "Icon & Appearance";
 "show_in_menu_bar" = "Show in Menu Bar";

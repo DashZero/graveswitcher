@@ -9,6 +9,7 @@
 "enable_graveswitch" = "เปิดใช้งาน GraveSwitch";
 "enable_graveswitch_desc" = "ปิดชั่วคราวหากคุณต้องการให้ปุ่ม ` ทำงานตามปกติ";
 "launch_at_login" = "เปิดแอพเมื่อล็อกอิน";
+"launch_at_login_desc" = "เปิดใช้งาน GraveSwitch โดยอัตโนมัติเมื่อเข้าสู่ระบบ Mac";
 "menu_bar_indicator" = "แสดงภาษาปัจจุบัน (EN/TH) ในเมนูบาร์";
 "icon_settings" = "ไอคอนและการแสดงผล";
 "show_in_menu_bar" = "แสดงใน Menu Bar";

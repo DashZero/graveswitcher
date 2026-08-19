@@ -349,7 +349,7 @@ struct GeneralSettingsView: View {
                 
                 // App Behavior Card
                 ModernCard(title: "general_settings", icon: "gearshape", iconColor: .gray) {
-                    VStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 10) {
                         Toggle(isOn: $settings.isEnabled) {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(LocalizedStringKey("enable_graveswitch"))
@@ -359,6 +359,8 @@ struct GeneralSettingsView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .toggleStyle(.checkbox)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Divider()
                         
@@ -371,12 +373,14 @@ struct GeneralSettingsView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .toggleStyle(.checkbox)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
                 
                 // Icon & Appearance Card
                 ModernCard(title: "icon_settings", icon: "menubar.arrow.up.rectangle", iconColor: .purple) {
-                    VStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 10) {
                         Toggle(isOn: $settings.showInMenuBar) {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(LocalizedStringKey("show_in_menu_bar"))
@@ -386,6 +390,8 @@ struct GeneralSettingsView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .toggleStyle(.checkbox)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Divider()
                         
@@ -398,11 +404,15 @@ struct GeneralSettingsView: View {
                                     .foregroundColor(.secondary)
                             }
                         }
+                        .toggleStyle(.checkbox)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         if settings.showInMenuBar {
                             Divider()
                             Toggle("menu_bar_indicator", isOn: $settings.showMenuBarText)
                                 .font(.system(size: 13, weight: .medium))
+                                .toggleStyle(.checkbox)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
                 }
