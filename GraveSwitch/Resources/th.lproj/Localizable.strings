@@ -42,12 +42,14 @@
 "status_active_short" = "เปิดใช้งาน";
 "status_paused_short" = "หยุดพัก";
 "current_language_label" = "ภาษาปัจจุบัน";
-"permission_required_warning" = "จำเป็นต้องได้รับสิทธิ์ Input Monitoring";
+"permission_required_warning" = "จำเป็นต้องได้รับสิทธิ์ Accessibility";
 "permission_granted_desc" = "อนุญาตการตรวจสอบแป้นพิมพ์เรียบร้อยแล้ว";
 "permission_desc_short" = "จำเป็นต้องได้รับสิทธิ์เพื่อตรวจจับการกดปุ่ม `";
+"grant_permission_button" = "เปิดการตั้งค่า Accessibility";
 "quit" = "ออก GraveSwitch";
 
 "settings_menu" = "การตั้งค่า...";
+"settings_title" = "การตั้งค่า GraveSwitch";
 "help_settings" = "วิธีใช้";
 "help_title" = "วิธีใช้งาน GraveSwitch";
 "help_desc" = "GraveSwitch เป็นเครื่องมือเล็กๆ ที่ทำให้ปุ่ม ` (Grave) ของคุณสลับไปมาระหว่างสองภาษาที่คุณเลือกได้ เหมือนกับใน Windows";
@@ -57,3 +59,8 @@
 "help_literal_grave_desc" = "หากคุณจำเป็นต้องพิมพ์เครื่องหมาย ` (เช่น เวลาเขียนโค้ด) ให้กด Option + `\nและหากต้องการพิมพ์เครื่องหมาย ~ ให้กด Option + Shift + `";
 "help_pause" = "การหยุดพัก GraveSwitch";
 "help_pause_desc" = "หากคุณต้องใช้ปุ่ม ` แบบปกติเป็นเวลานาน ให้คลิกไอคอนบน Menu Bar แล้วปิด 'เปิดใช้งาน GraveSwitch' ในแท็บทั่วไป คุณสามารถเปิดกลับมาได้ตลอดเวลา";
+
+"caps_lock_section_title" = "การสลับภาษาด้วย Caps Lock ของ macOS";
+"caps_lock_section_desc" = "หาก macOS ตั้งค่าให้สลับภาษาด้วยปุ่ม Caps Lock ไว้ ปุ่ม Caps Lock จะไม่สามารถใช้งานพิมพ์ตัวพิมพ์ใหญ่ (ALL CAPS) แบบปกติได้ คุณสามารถปิดการสลับภาษาด้วย Caps Lock ในการตั้งค่าแป้นพิมพ์ของ macOS เพื่อคืนค่าให้ Caps Lock ทำงานเป็นปุ่ม Caps Lock ปกติ และใช้ GraveSwitch (ปุ่ม `) ในการสลับแทน";
+"open_keyboard_settings" = "เปิดการตั้งค่าแป้นพิมพ์";
+

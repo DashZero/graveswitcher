@@ -1,71 +1,114 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var selection: String? = "General"
+    @State private var selection: String = "General"
     
     var body: some View {
-        NavigationSplitView {
-            List(selection: $selection) {
-                Label("general_settings", systemImage: "gearshape")
-                    .tag("General")
-                Label("keyboard_settings", systemImage: "keyboard")
-                    .tag("Keyboard")
-                Label("about_settings", systemImage: "info.circle")
-                    .tag("About")
+        HStack(spacing: 0) {
+            // Sidebar
+            VStack(alignment: .leading, spacing: 4) {
+                SidebarButton(title: "general_settings", icon: "gearshape", tag: "General", selection: $selection)
+                SidebarButton(title: "keyboard_settings", icon: "keyboard", tag: "Keyboard", selection: $selection)
+                SidebarButton(title: "about_settings", icon: "info.circle", tag: "About", selection: $selection)
+                Spacer()
             }
-            .navigationSplitViewColumnWidth(min: 160, ideal: 180, max: 200)
-        } detail: {
-            switch selection {
-            case "General":
-                GeneralSettingsView()
-            case "Keyboard":
-                KeyboardSettingsView()
-            case "About":
-                AboutView()
-            default:
-                GeneralSettingsView()
+            .padding(12)
+            .frame(width: 170)
+            .background(Color(NSColor.controlBackgroundColor))
+            
+            Divider()
+            
+            // Detail Content
+            Group {
+                switch selection {
+                case "General":
+                    GeneralSettingsView()
+                case "Keyboard":
+                    KeyboardSettingsView()
+                case "About":
+                    AboutView()
+                default:
+                    GeneralSettingsView()
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .frame(width: 620, height: 480)
-        .onAppear {
-            NSApp.activate(ignoringOtherApps: true)
+    }
+}
+
+struct SidebarButton: View {
+    let title: String
+    let icon: String
+    let tag: String
+    @Binding var selection: String
+    
+    var isSelected: Bool {
+        selection == tag
+    }
+    
+    var body: some View {
+        Button {
+            selection = tag
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: icon)
+                    .font(.system(size: 14))
+                    .foregroundColor(isSelected ? .accentColor : .secondary)
+                    .frame(width: 20)
+                Text(LocalizedStringKey(title))
+                    .font(.system(size: 13, weight: isSelected ? .semibold : .regular))
+                    .foregroundColor(isSelected ? .primary : .secondary)
+                Spacer()
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 8)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(isSelected ? Color.primary.opacity(0.1) : Color.clear)
+            )
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
     }
 }
 
 struct GeneralSettingsView: View {
     @EnvironmentObject var settings: SettingsManager
-    @State private var sources = InputSourceManager.shared.availableSources()
-    @State private var hasPermission = KeyboardEventTapManager.shared.checkPermission()
+    @ObservedObject var tapManager = KeyboardEventTapManager.shared
+    @State private var sources: [InputSourceManager.InputSource] = []
     
     var body: some View {
         Form {
             // Permission Status Section
             Section("permissions_settings") {
                 HStack(spacing: 12) {
-                    Image(systemName: hasPermission ? "checkmark.shield.fill" : "exclamationmark.shield.fill")
+                    Image(systemName: tapManager.hasPermission ? "checkmark.shield.fill" : "exclamationmark.shield.fill")
                         .font(.title2)
-                        .foregroundColor(hasPermission ? .green : .orange)
+                        .foregroundColor(tapManager.hasPermission ? .green : .orange)
                     
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(hasPermission ? "permission_granted" : "permission_title")
+                        Text(tapManager.hasPermission ? "permission_granted" : "permission_title")
                             .font(.subheadline)
                             .bold()
-                        Text(hasPermission ? "permission_granted_desc" : "permission_desc_short")
+                        Text(tapManager.hasPermission ? "permission_granted_desc" : "permission_desc_short")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
                     
                     Spacer()
                     
-                    if !hasPermission {
-                        Button("open_system_settings") {
-                            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent") {
+                    if !tapManager.hasPermission {
+                        Button {
+                            tapManager.requestPermission()
+                            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
                                 NSWorkspace.shared.open(url)
                             }
+                        } label: {
+                            Text(LocalizedStringKey("grant_permission_button"))
                         }
                         .buttonStyle(.borderedProminent)
-                        .controlSize(.small)
+                        .controlSize(.regular)
                     }
                 }
                 .padding(.vertical, 4)
@@ -73,15 +116,20 @@ struct GeneralSettingsView: View {
             
             // Languages Section
             Section("languages_settings") {
-                Picker("language_a", selection: $settings.languageA) {
-                    ForEach(sources, id: \.id) { source in
-                        Text(source.name).tag(source.id)
+                if sources.isEmpty {
+                    Text("Loading languages...")
+                        .foregroundColor(.secondary)
+                } else {
+                    Picker("language_a", selection: $settings.languageA) {
+                        ForEach(sources, id: \.id) { source in
+                            Text(source.name).tag(source.id)
+                        }
                     }
-                }
-                
-                Picker("language_b", selection: $settings.languageB) {
-                    ForEach(sources, id: \.id) { source in
-                        Text(source.name).tag(source.id)
+                    
+                    Picker("language_b", selection: $settings.languageB) {
+                        ForEach(sources, id: \.id) { source in
+                            Text(source.name).tag(source.id)
+                        }
                     }
                 }
                 
@@ -125,10 +173,53 @@ struct GeneralSettingsView: View {
                     Toggle("menu_bar_indicator", isOn: $settings.showMenuBarText)
                 }
             }
+            
+            Section(LocalizedStringKey("caps_lock_section_title")) {
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(LocalizedStringKey("caps_lock_section_desc"))
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    Button {
+                        if let url = URL(string: "x-apple.systempreferences:com.apple.Keyboard-Settings.extension") {
+                            if !NSWorkspace.shared.open(url) {
+                                if let fallbackUrl = URL(string: "x-apple.systempreferences:com.apple.preference.keyboard") {
+                                    NSWorkspace.shared.open(fallbackUrl)
+                                }
+                            }
+                        }
+                    } label: {
+                        Label(LocalizedStringKey("open_keyboard_settings"), systemImage: "keyboard")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .padding(.top, 2)
+                }
+            }
+            
+            Section("Reset & Uninstall") {
+                Button(role: .destructive) {
+                    KeyboardEventTapManager.shared.stop()
+                    let task1 = Process()
+                    task1.executableURL = URL(fileURLWithPath: "/usr/bin/tccutil")
+                    task1.arguments = ["reset", "Accessibility", "com.example.GraveSwitch"]
+                    try? task1.run()
+                    
+                    let task2 = Process()
+                    task2.executableURL = URL(fileURLWithPath: "/usr/bin/tccutil")
+                    task2.arguments = ["reset", "ListenEvent", "com.example.GraveSwitch"]
+                    try? task2.run()
+                } label: {
+                    Label("Reset App Permissions", systemImage: "trash")
+                }
+            }
         }
         .formStyle(.grouped)
         .onAppear {
-            hasPermission = KeyboardEventTapManager.shared.checkPermission()
+            _ = KeyboardEventTapManager.shared.checkPermission()
+            if sources.isEmpty {
+                self.sources = InputSourceManager.shared.availableSources()
+            }
         }
     }
 }
@@ -148,15 +239,15 @@ struct KeyboardSettingsView: View {
                 
                 // Shortcut Table Card
                 VStack(spacing: 0) {
-                    ShortcutRow(key: "`", desc: "switch_language_desc")
+                    ShortcutRow(keys: [("`", nil)], desc: "switch_language_desc")
                     Divider()
-                    ShortcutRow(key: "Shift + `", desc: "switch_language_desc")
+                    ShortcutRow(keys: [("Shift", "shift"), ("`", nil)], desc: "switch_language_desc")
                     Divider()
-                    ShortcutRow(key: "Option + `", desc: "type_backtick_desc")
+                    ShortcutRow(keys: [("Option", "option"), ("`", nil)], desc: "type_backtick_desc")
                     Divider()
-                    ShortcutRow(key: "Option + Shift + `", desc: "type_tilde_desc")
+                    ShortcutRow(keys: [("Option", "option"), ("Shift", "shift"), ("`", nil)], desc: "type_tilde_desc")
                     Divider()
-                    ShortcutRow(key: "Command + `", desc: "macos_shortcuts_desc", isProtected: true)
+                    ShortcutRow(keys: [("Command", "command"), ("`", nil)], desc: "macos_shortcuts_desc", isProtected: true)
                 }
                 .background(RoundedRectangle(cornerRadius: 10).fill(Color.primary.opacity(0.03)))
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.primary.opacity(0.08), lineWidth: 1))
@@ -174,6 +265,28 @@ struct KeyboardSettingsView: View {
                     Text("help_literal_grave_desc")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
+                    
+                    Text(LocalizedStringKey("caps_lock_section_title"))
+                        .font(.headline)
+                        .padding(.top, 4)
+                    Text(LocalizedStringKey("caps_lock_section_desc"))
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    
+                    Button {
+                        if let url = URL(string: "x-apple.systempreferences:com.apple.Keyboard-Settings.extension") {
+                            if !NSWorkspace.shared.open(url) {
+                                if let fallbackUrl = URL(string: "x-apple.systempreferences:com.apple.preference.keyboard") {
+                                    NSWorkspace.shared.open(fallbackUrl)
+                                }
+                            }
+                        }
+                    } label: {
+                        Label(LocalizedStringKey("open_keyboard_settings"), systemImage: "keyboard")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.regular)
+                    .padding(.top, 4)
                 }
             }
             .padding(20)
@@ -181,19 +294,50 @@ struct KeyboardSettingsView: View {
     }
 }
 
+struct KeyCapView: View {
+    let title: String
+    var sfSymbol: String? = nil
+    
+    var body: some View {
+        HStack(spacing: 4) {
+            if let symbol = sfSymbol {
+                Image(systemName: symbol)
+                    .font(.system(size: 11, weight: .medium))
+            }
+            Text(title)
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 5)
+        .background(
+            RoundedRectangle(cornerRadius: 6)
+                .fill(Color(NSColor.controlColor))
+                .shadow(color: Color.black.opacity(0.15), radius: 1, x: 0, y: 1)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 6)
+                .stroke(Color.primary.opacity(0.12), lineWidth: 1)
+        )
+    }
+}
+
 struct ShortcutRow: View {
-    let key: String
+    let keys: [(title: String, symbol: String?)]
     let desc: String
     var isProtected: Bool = false
     
     var body: some View {
         HStack {
-            Text(key)
-                .font(.system(.body, design: .monospaced))
-                .bold()
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(RoundedRectangle(cornerRadius: 6).fill(Color.primary.opacity(0.08)))
+            HStack(spacing: 6) {
+                ForEach(0..<keys.count, id: \.self) { index in
+                    if index > 0 {
+                        Text("+")
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundColor(.secondary)
+                    }
+                    KeyCapView(title: keys[index].0, sfSymbol: keys[index].1)
+                }
+            }
             
             Spacer()
             
@@ -218,10 +362,11 @@ struct AboutView: View {
             VStack(spacing: 20) {
                 Image("FamilyImage")
                     .resizable()
-                    .scaledToFit()
-                    .frame(maxHeight: 180)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxHeight: 160)
                     .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 4)
+                    .shadow(color: .black.opacity(0.15), radius: 4, x: 0, y: 2)
+                    .padding(.top, 10)
                 
                 VStack(spacing: 4) {
                     Text("GraveSwitch")

@@ -42,12 +42,14 @@
 "status_active_short" = "Active";
 "status_paused_short" = "Paused";
 "current_language_label" = "CURRENT LANGUAGE";
-"permission_required_warning" = "Input Monitoring permission required";
+"permission_required_warning" = "Accessibility permission required";
 "permission_granted_desc" = "Keyboard monitoring is enabled and working.";
-"permission_desc_short" = "Input Monitoring permission is needed to intercept the ` key.";
+"permission_desc_short" = "Accessibility permission is needed to intercept the ` key.";
+"grant_permission_button" = "Open Accessibility Settings";
 "quit" = "Quit GraveSwitch";
 
 "settings_menu" = "Settings...";
+"settings_title" = "GraveSwitch Settings";
 "help_settings" = "Help";
 "help_title" = "How to use GraveSwitch";
 "help_desc" = "GraveSwitch is a simple utility that makes your ` (Grave) key toggle between your two preferred languages, just like on Windows.";
@@ -57,3 +59,8 @@
 "help_literal_grave_desc" = "If you need to type the ` character (for example, while coding or writing Markdown), press Option + `.\nTo type a tilde (~), press Option + Shift + `.";
 "help_pause" = "Pausing GraveSwitch";
 "help_pause_desc" = "If you need the ` key to behave normally for an extended period, open this app from the Menu Bar and toggle off 'Enable GraveSwitch' in the General settings. You can toggle it back on whenever you're ready.";
+
+"caps_lock_section_title" = "macOS Caps Lock Language Switch";
+"caps_lock_section_desc" = "If macOS is configured to switch input sources with Caps Lock, the Caps Lock key cannot be used normally for ALL CAPS typing. You can turn off Caps Lock language switching in macOS Keyboard Settings so Caps Lock works normally, and use GraveSwitch (` key) for language switching.";
+"open_keyboard_settings" = "Open Keyboard Settings";
+
