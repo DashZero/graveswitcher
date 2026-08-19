@@ -414,29 +414,7 @@ struct GeneralSettingsView: View {
                     }
                 }
                 
-                // Caps Lock Helper Card
-                ModernCard(title: "caps_lock_section_title", icon: "capslock.fill", iconColor: .orange) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(LocalizedStringKey("caps_lock_section_desc"))
-                            .font(.system(size: 11))
-                            .foregroundColor(.secondary)
-                        
-                        Button {
-                            if let url = URL(string: "x-apple.systempreferences:com.apple.Keyboard-Settings.extension") {
-                                if !NSWorkspace.shared.open(url) {
-                                    if let fallbackUrl = URL(string: "x-apple.systempreferences:com.apple.preference.keyboard") {
-                                        NSWorkspace.shared.open(fallbackUrl)
-                                    }
-                                }
-                            }
-                        } label: {
-                            Label(LocalizedStringKey("open_keyboard_settings"), systemImage: "keyboard")
-                        }
-                        .buttonStyle(.bordered)
-                        .controlSize(.small)
-                    }
-                }
-                
+
                 // Reset & Maintenance Card
                 ModernCard(title: "Reset & Maintenance", icon: "trash.fill", iconColor: .red) {
                     HStack {

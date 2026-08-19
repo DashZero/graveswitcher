@@ -97,3 +97,5 @@ GraveSwitch.xcodeproj/
 
 # App builds
 *.app
+*.zip
+
