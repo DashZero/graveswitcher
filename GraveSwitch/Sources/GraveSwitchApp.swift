@@ -13,11 +13,7 @@ struct GraveSwitchApp: App {
             ContentView()
                 .environmentObject(settings)
         } label: {
-            Image("AppIcon")
-                // A template rendering mode makes it monochrome and adaptive to Dark/Light mode
-                // Since "AppIcon" usually has colors, we might need a specific template image.
-                // Assuming the user's icon works as a template or they just want the raw image.
-                // We'll let macOS handle it based on standard MenuBarExtra behaviors.
+            Image(systemName: "keyboard")
         }
         
         // The Settings window is standard SwiftUI
