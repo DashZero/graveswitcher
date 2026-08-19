@@ -33,8 +33,7 @@ struct SettingsView: View {
                     Label("help_settings", systemImage: "questionmark.circle")
                 }
         }
-        .padding()
-        .frame(width: 500, height: 400)
+        .frame(width: 550, height: 450)
     }
 }
 

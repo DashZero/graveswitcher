@@ -17,11 +17,10 @@ struct GraveSwitchApp: App {
         }
         
         // The Settings window is standard SwiftUI
-        Window("GraveSwitch", id: "settings") {
+        Settings {
             SettingsView()
                 .environmentObject(settings)
         }
-        .windowResizability(.contentSize)
     }
 }
 
@@ -67,7 +66,7 @@ struct ContentView: View {
             Divider()
             
             Button("settings") {
-                openWindow(id: "settings")
+                NSApp.sendAction(Selector("showSettingsWindow:"), to: nil, from: nil)
                 NSApp.activate(ignoringOtherApps: true)
             }
             
